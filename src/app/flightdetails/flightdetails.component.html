@@ -1,0 +1,33 @@
+<form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Airline</mat-label>
+      <input matInput formControlName="airline">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Arrival Date</mat-label>
+      <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="arrivalDate">
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Arrival Time</mat-label>
+      <input matInput [ngxTimepicker]="timepicker" formControlName="arrivalTime">
+      <ngx-material-timepicker #timepicker></ngx-material-timepicker>
+      <!-- <input matInput formControlName="arrivalTime"> -->
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Flight Number</mat-label>
+        <input matInput formControlName="flightNumber">
+      </mat-form-field>
+    <mat-form-field>
+      <mat-label>No of Guests</mat-label>
+      <input matInput type="number" formControlName="numOfGuests">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Comments</mat-label>
+      <textarea matInput formControlName="comments"></textarea>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Submit</button>
+  </form>
+  

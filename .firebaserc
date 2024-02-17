@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "coding-challenge-616db": {
+      "hosting": {
+        "coding-challenge": [
+          "coding-challenge-616db"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "coding-challenge-616db"
+  }
+}
