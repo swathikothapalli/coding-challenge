@@ -3,7 +3,6 @@ import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {GoogleAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +17,14 @@ export class AuthService  {
   }
 
   forgotPassword(email: string){
-    this.fireauth.sendPasswordResetEmail(email).then(() => {
+    this.fireauth
+    .sendPasswordResetEmail(
+      email,
+      { url: 'https://coding-challenge-616db.web.app/login',
+        handleCodeInApp: false
+      }
+    )
+    .then(() => {
       this.router.navigate(['/verify-email']);
     }, err => {
       alert('Something went wrong');
