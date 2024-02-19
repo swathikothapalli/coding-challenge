@@ -78,10 +78,14 @@ export class FlightdetailsComponent {
           this.formDirective.resetForm();
         } else {
           this.snackBar.open('Error submitting flight details', '', { duration: 3000, panelClass:['failed'] });
+          this.flightForm.reset();
+          this.formDirective.resetForm();
         }
       },
       (error: any) => {
         this.snackBar.open('Error submitting flight details', '', { duration: 3000 });
+        this.flightForm.reset();
+        this.formDirective.resetForm();
       }
     );
   }
