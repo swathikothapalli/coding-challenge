@@ -8,13 +8,15 @@
       <mat-label>Email</mat-label>
       <input matInput placeholder="Email" formControlName="email">
       <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
+      <mat-error *ngIf="registerForm.controls.email.invalid">Invalid email</mat-error>
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
       <input matInput placeholder="Password" type="password" formControlName="password">
       <mat-icon matSuffix matTooltip="Password must be at least 8 characters long and contain at least one special character (@,#,$,%^,&,())">info</mat-icon>
-      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password doesn't meet requirement</mat-error>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password is required</mat-error>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('invalidPassword')">Password doesn't meet requirement</mat-error>
     </mat-form-field>
   
     <div class ="row" style="display:flex; justify-content: center; margin-bottom:10px;">
