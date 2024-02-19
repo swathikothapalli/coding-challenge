@@ -1,6 +1,5 @@
-import { Component, OnInit} from '@angular/core';
-
-import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidatorFn} from '@angular/forms';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
@@ -19,6 +18,7 @@ export class LoginComponent implements OnInit{
 
   loginForm: FormGroup;
   emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+  @ViewChild('formDirective') formDirective: FormGroupDirective;
   
   constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackbar: MatSnackBar) {
   }
@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit{
     }).catch(()=> {
       this.snackbar.open('Invalid Credentials', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'})
       this.loginForm.reset();
+      this.formDirective.resetForm();
     });
   }
 

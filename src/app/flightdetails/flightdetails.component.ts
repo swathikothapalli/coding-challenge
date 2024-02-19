@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/enviroment';
 import { Router } from '@angular/router';
@@ -27,6 +27,21 @@ export class FlightdetailsComponent {
   flightForm: FormGroup;
   ngxTimepicker: NgxMaterialTimepickerComponent
   minDate: Date;
+  @ViewChild('formDirective') formDirective: FormGroupDirective;
+
+
+  airlines: string[] = [
+    'Alaska',
+    'Allegiant',
+    'American',
+    'Delta',
+    'Frontier',
+    'Hawaiian',
+    'JetBlue',
+    'Southwest',
+    'Spirit',
+    'United'
+  ]
 
   constructor(private fb: FormBuilder, private snackBar: MatSnackBar, private http: HttpClient, private router: Router) {
     this.flightForm = this.fb.group({
@@ -46,15 +61,20 @@ export class FlightdetailsComponent {
 
 
   onSubmit(): void {
+    if(this.flightForm.invalid){
+      console.log(this.flightForm);
+      return;
+    }
+
     const formData = this.flightForm.value;
     const details = {...formData, arrivalDate: formatDate(formData?.arrivalDate)}
-    console.log(details);
     
     this.http.post(environment.apiEndPoint, details).subscribe(
       (response: any) => {
         if (response == true) {
           this.snackBar.open('Details submitted successfully', '', { duration: 3000,panelClass:['success'] });
-          this.router.navigate(['flightdetails'])
+          this.flightForm.reset();
+          this.formDirective.resetForm();
         } else {
           this.snackBar.open('Error submitting flight details', '', { duration: 3000, panelClass:['failed'] });
         }

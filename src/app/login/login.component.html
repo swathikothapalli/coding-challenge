@@ -2,7 +2,7 @@
   Login
 </div>
 <div class="loginFormStyle">
-  <form [formGroup]="loginForm" (ngSubmit)="login()">
+  <form [formGroup]="loginForm" (ngSubmit)="login()" #formDirective="ngForm">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
       <input matInput placeholder="Email" formControlName="email">
