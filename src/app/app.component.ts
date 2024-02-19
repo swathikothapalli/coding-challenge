@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterModule, RouterOutlet } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthService } from './auth.service';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,11 +11,25 @@ import { CommonModule } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
   imports:[
+    CommonModule,
     RouterOutlet,
     MatToolbarModule,
+    RouterLink,
+    RouterLinkActive,
   ]
 })
 export class AppComponent {
   title = 'coding-challenge';
   currentYear: number = new Date().getFullYear();
+
+  constructor(private authService: AuthService){
+  }
+
+  isSignedIn(){
+    return this.authService.isSignedIn();
+  }
+
+  logout(){
+    this.authService.logout();
+  }
 }

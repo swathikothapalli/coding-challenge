@@ -1,15 +1,13 @@
 .main {
     padding: 20px;
-    /* height: 100%;
-    width: 100%; */
-    /* assets/backdrop.jpg */
-    /* background: url('../assets/backdrop.jpg') no-repeat center center fixed;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; */
+    padding: 20px;
+    position: relative;
+    width: auto;
+    height: 525px
+}
 
+.header{
+    position: relative;
 }
 
 .footer {
@@ -24,6 +22,11 @@
     color: white;
     font-size: 25px;
     text-decoration: none;
+    margin-right: 10px;
+}
+
+.logout-btn{
     position: absolute;
-    top: 30%;
+    right: 5%;
+    font-size: 20px;
 }

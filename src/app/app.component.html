@@ -1,6 +1,7 @@
 <mat-toolbar color="primary" class="header">
-    <span>{{title}}</span>
-    <button mat-button hidden="*ngIf=localStorage.getItem('isSignedIn')">Logout</button>
+    <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page"class="link">Home</a>
+    <a routerLink="flightdetails" routerLinkActive="active" ariaCurrentWhenActive="page" class="link">Reservation Form</a>
+    <button mat-button *ngIf="isSignedIn()" (click)="logout()" class="logout-btn">Logout</button>
 </mat-toolbar>
 
 <div class="main">

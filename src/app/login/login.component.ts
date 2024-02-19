@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective} from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   imports: [
-    SharedModule
+    SharedModule,
   ]
 })
 export class LoginComponent implements OnInit{

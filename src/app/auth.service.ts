@@ -11,6 +11,9 @@ export class AuthService  {
 
   constructor(public fireauth: AngularFireAuth, private router: Router, private snackbar: MatSnackBar) { }
 
+  isSignedIn(): boolean {
+    return localStorage.getItem('isSignedIn') === 'true';
+  }
 
   signInWithEmailAndPassword(email: string, password: string): Promise<any> {
     return this.fireauth.signInWithEmailAndPassword(email, password);

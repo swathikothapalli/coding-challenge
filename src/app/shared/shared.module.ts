@@ -10,6 +10,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { RouterModule, RouterOutlet } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
     MatIconModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterModule,
   ],
   exports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { CommonModule } from '@angular/common';
     MatNativeDateModule,
     MatIconModule,
     MatTooltipModule,
-    MatSelectModule
+    MatSelectModule,
+    RouterModule,
   ]
 })
 export class SharedModule { }

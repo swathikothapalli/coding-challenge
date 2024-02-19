@@ -2,7 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { environment } from '../../../environments/enviroment';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 
 import {MatSnackBar} from '@angular/material/snack-bar'; 
 import {NgxMaterialTimepickerComponent, NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
   standalone: true,
   imports: [
     SharedModule,
+    RouterOutlet,
     HttpClientModule,
     NgxMaterialTimepickerModule
   ],
