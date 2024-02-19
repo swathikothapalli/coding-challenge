@@ -14,3 +14,5 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 email: abc@gmail.com
 password: abc1234@
 </pre>
+
+if you face any errors in running application, kindly delete `package-lock.json` and re-run `npm install`.
