@@ -2,27 +2,19 @@ import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/compat/auth';
 import {GoogleAuthProvider} from '@angular/fire/auth'
 import { Router } from '@angular/router';
-import { LogService } from './log.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService  {
 
-  constructor(public fireauth: AngularFireAuth, private router: Router, private _logger: LogService) { }
+  constructor(public fireauth: AngularFireAuth, private router: Router, private snackbar: MatSnackBar) { }
 
-  login(email: string, password: string){
-    this.fireauth
-    .signInWithEmailAndPassword(email,password)
-    .then(() => {
-      localStorage.setItem('isSignedIn', 'true');
-      this.router.navigate(['/flightdetails']);
-    }, err => {
-      // need to implement toast component
-      //this._logger.log(`error ${err} occured during login`)
-      console.log(err);
-      this.router.navigate(['/login']);
-    })
+
+  signInWithEmailAndPassword(email: string, password: string): Promise<any> {
+    return this.fireauth.signInWithEmailAndPassword(email, password);
   }
 
   forgotPassword(email: string){
@@ -45,13 +37,18 @@ export class AuthService  {
     this.fireauth
     .createUserWithEmailAndPassword(email,password)
     .then((res)=> {
-      //toast component
+      this.snackbar.open('Successfully registered', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'})
       this.router.navigate(['/login'])
-      this.sendEmailForVerification(res.user);
+      //this.sendEmailForVerification(res.user);
     },err => {
-      //toast component
-      //this._logger.log(`error ${err} occured during registration`)
-      this.router.navigate(['/register'])
+      const errorCode = err.code;
+      if(errorCode == "auth/email-already-in-use"){
+        this.snackbar.open('Email already registered', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'})
+        this.router.navigate(['/login'])
+      } else {
+        this.snackbar.open('Something went wrong', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'});
+        this.router.navigate(['/register']);
+      }    
     })
   }
 
@@ -71,11 +68,12 @@ export class AuthService  {
     return this.fireauth
     .signInWithPopup(new GoogleAuthProvider)
     .then(()=>{
-      localStorage.setItem('isSignedIn', 'true');
+      if(localStorage.getItem('isSignedIn') == null){
+        localStorage.setItem('isSignedIn', 'true');
+      }
       this.router.navigate(['/flightdetails'])
     }, err => {
-      // show error through toast message
-      //this._logger.log(`error ${err} occured during google login`)
+      this.snackbar.open('Login failed', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'});
     })
   }
 }

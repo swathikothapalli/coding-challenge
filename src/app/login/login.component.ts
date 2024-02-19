@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, A
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -19,39 +20,34 @@ export class LoginComponent implements OnInit{
   loginForm: FormGroup;
   emailRegx = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private snackbar: MatSnackBar) {
   }
-
-  passwordValidator: ValidatorFn = (control: AbstractControl): { [key: string]: any } | null => {
-    const password = control.value;
-    const hasSpecialCharacters = /[!@#$%^&*()]/.test(password);
-    const hasMinimumLength = password.length >= 8;
-  
-    if (!hasSpecialCharacters || !hasMinimumLength) {
-      return { invalidPassword: true };
-    }
-    
-    return null;
-  };
 
   ngOnInit(): void{
     this.loginForm = this.formBuilder.group({
-      email: [null, [Validators.required, Validators.pattern(this.emailRegx)]],
-      password: [null, [Validators.required, Validators.min(8), ]]
-    },{ validator:this.passwordValidator });
+      email: ['', [Validators.required, Validators.pattern(this.emailRegx)]],
+      password: ['', [Validators.required]]
+    });
   }
 
   login() {
     if (!this.loginForm.valid) {
-      console.log(this.loginForm);
       return;
     }
 
     let email = this.loginForm.value.email;
     let password = this.loginForm.value.password;
-
-    console.log(this.loginForm.value);
-    this.authService.login(email, password);
+    this.authService
+    .signInWithEmailAndPassword(email, password)
+    .then(()=> {
+      if(localStorage.getItem('isSignedIn') == null){
+        localStorage.setItem('isSignedIn', 'true');
+      }
+      this.router.navigate(['/flightdetails']);
+    }).catch(()=> {
+      this.snackbar.open('Invalid Credentials', '',{duration: 3000, horizontalPosition: 'center', verticalPosition:'top'})
+      this.loginForm.reset();
+    });
   }
 
   signInWithGoogle() {
