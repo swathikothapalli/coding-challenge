@@ -1,0 +1,78 @@
+.example-container{
+    text-align: center
+}
+
+.form-container{
+    width: 400 px;
+    margin: 0 px auto;
+    margin-top: 200 px
+}
+
+.form-field{
+    display: block
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 16px 0;
+}
+
+.loginFormStyle {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    justify-content: center;
+  }
+
+.or-word {
+background-color: #fff;
+margin-left: 13px;
+color: #888;
+}
+
+.or-word::before{
+  content: "";
+  border: 1px solid ;
+  width: 40%;
+  display: inline-block;
+  margin-bottom: 3px;
+  margin-right: 5px;
+}
+
+.or-word::after {
+  content: "";
+  border: 1px solid ;
+  width: 40%;
+  display: inline-block;
+  margin-bottom: 3px;
+  margin-left: 5px;
+}
+
+.login-text {
+  position: absolute;
+  left: 47%;
+  top: 20%;
+  font-size: 30px;
+}
+
+::ng-deep .mat-mdc-form-field {
+  display: inline !important;
+}
+
+::ng-deep .mdc-button__label {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}

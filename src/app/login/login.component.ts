@@ -1,14 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 
 import { FormGroup, FormBuilder, Validators, ReactiveFormsModule, FormsModule, AbstractControl, ValidatorFn} from '@angular/forms';
-import { MatError, MatFormFieldModule, MatLabel } from '@angular/material/form-field';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 @Component({
   selector: 'app-login',
@@ -16,17 +11,8 @@ import { Router } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatError,
-    MatLabel,
-    MatIconModule,
-    MatTooltipModule
-  ],
+    SharedModule
+  ]
 })
 export class LoginComponent implements OnInit{
 
@@ -73,7 +59,7 @@ export class LoginComponent implements OnInit{
   }
 
   forgotPassword(){
-
+    this.router.navigate(['forgot-password']);
   }
 
   navigateToRegister(){

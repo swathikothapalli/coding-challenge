@@ -1,19 +1,30 @@
+<div class="login-text">
+  Register
+</div>
+
+<div class="loginFormStyle">
 <form [formGroup]="registerForm" (ngSubmit)="register()">
     <mat-form-field appearance="fill">
       <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="registerForm.get('email')?.hasError('required')">Email is required</mat-error>
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Password</mat-label>
-      <input matInput type="password" formControlName="password">
+      <input matInput placeholder="Password" type="password" formControlName="password">
+      <mat-icon matSuffix matTooltip="Password must be at least 8 characters long and contain at least one special character (@,#,$,%^,&,())">info</mat-icon>
+      <mat-error *ngIf="registerForm.get('password')?.hasError('required')">Password doesn't meet requirement</mat-error>
     </mat-form-field>
   
-    <button mat-raised-button color="primary" type="submit">Sign up</button>
-      
-    <div class="divider">
-      <span class="or-word">or</span>
+    <div class ="row" style="display:flex; justify-content: center; margin-bottom:10px;">
+      <button mat-raised-button color="primary" type="submit">Register</button>
     </div>
-  
-    <button mat-raised-button type="button" (click)="navigateToLogin()">Login</button>
+      
+    <span class="or-word">or</span>
+
+    <div class="row" style="display:flex; justify-content: center; margin-top: 10px;">
+      <button mat-raised-button type="button" (click)="navigateToLogin()">Login</button>
+    </div>
   </form>
+</div>

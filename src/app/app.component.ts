@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
   styleUrl: './app.component.css',
   imports:[
     RouterOutlet,
-    MatToolbarModule
+    MatToolbarModule,
   ]
 })
 export class AppComponent {

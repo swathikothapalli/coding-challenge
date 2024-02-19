@@ -1,0 +1,46 @@
+.success {
+  background-color: green;
+  color: white;
+}
+
+.failed {
+  background-color: red;
+  color: white;
+}
+
+.loginFormStyle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  justify-content: center;
+}
+
+.form-container{
+  width: 400 px;
+  margin: 0 px auto;
+  margin-top: 200 px
+}
+
+.form-field{
+  display: block
+}
+
+::ng-deep .mat-mdc-form-field {
+  display: inline !important;
+}
+
+::ng-deep .mdc-button__label {
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+}

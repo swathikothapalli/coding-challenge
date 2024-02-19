@@ -1,33 +1,50 @@
-<form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
+<div class="login-text">
+  Reservation Form
+</div>
+
+<div class="loginFormStyle">
+  <form [formGroup]="flightForm" (ngSubmit)="onSubmit()">
     <mat-form-field>
       <mat-label>Airline</mat-label>
       <input matInput formControlName="airline">
+      <mat-error *ngIf="flightForm.get('airline')?.hasError('required')">Airline name is required</mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Arrival Date</mat-label>
       <input matInput [min]="minDate" [matDatepicker]="picker" formControlName="arrivalDate">
       <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-error *ngIf="flightForm.get('arrivalDate')?.hasError('required')">Arrival date is required</mat-error>
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Arrival Time</mat-label>
       <input matInput [ngxTimepicker]="timepicker" formControlName="arrivalTime">
+      <mat-error *ngIf="flightForm.get('arrivalTime')?.hasError('required')">Arrival time is required</mat-error>
       <ngx-material-timepicker #timepicker></ngx-material-timepicker>
-      <!-- <input matInput formControlName="arrivalTime"> -->
     </mat-form-field>
+
     <mat-form-field>
-        <mat-label>Flight Number</mat-label>
-        <input matInput formControlName="flightNumber">
-      </mat-form-field>
+      <mat-label>Flight Number</mat-label>
+      <input matInput formControlName="flightNumber">
+      <mat-error *ngIf="flightForm.get('flightNumber')?.hasError('required')">Flight Number is required</mat-error>
+    </mat-form-field>
+
     <mat-form-field>
       <mat-label>No of Guests</mat-label>
       <input matInput type="number" formControlName="numOfGuests">
+      <mat-error *ngIf="flightForm.get('numOfGuests')?.hasError('required')">required</mat-error>
     </mat-form-field>
+
     <mat-form-field>
       <mat-label>Comments</mat-label>
       <textarea matInput formControlName="comments"></textarea>
     </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Submit</button>
+
+    <div class ="row" style="display:flex; justify-content: center; margin-bottom:10px;">
+      <button mat-raised-button color="primary" type="submit">Submit</button>
+    </div>
   </form>
-  
+</div>

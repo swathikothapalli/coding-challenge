@@ -15,7 +15,7 @@ export class AuthService  {
     this.fireauth
     .signInWithEmailAndPassword(email,password)
     .then(() => {
-      //localStorage.setItem('isloggedin', 'true');
+      localStorage.setItem('isSignedIn', 'true');
       this.router.navigate(['/flightdetails']);
     }, err => {
       // need to implement toast component
@@ -25,13 +25,29 @@ export class AuthService  {
     })
   }
 
+  forgotPassword(email: string){
+    this.fireauth.sendPasswordResetEmail(email).then(() => {
+      this.router.navigate(['/verify-email']);
+    }, err => {
+      alert('Something went wrong');
+    })
+  }
+
+  sendEmailForVerification(user : any) {
+    user.sendEmailVerification().then((res : any) => {
+      this.router.navigate(['/verify-email']);
+    }, (err : any) => {
+      alert('Something went wrong. Not able to send mail to your email.')
+    })
+  }
 
   register(email: string, password: string){
     this.fireauth
     .createUserWithEmailAndPassword(email,password)
-    .then(()=> {
+    .then((res)=> {
       //toast component
       this.router.navigate(['/login'])
+      this.sendEmailForVerification(res.user);
     },err => {
       //toast component
       //this._logger.log(`error ${err} occured during registration`)
@@ -43,6 +59,7 @@ export class AuthService  {
     this.fireauth
     .signOut()
     .then(()=>{
+      localStorage.removeItem('isSignedIn');
       this.router.navigate(['/login'])
     }, err => {
       //toast message
@@ -54,8 +71,8 @@ export class AuthService  {
     return this.fireauth
     .signInWithPopup(new GoogleAuthProvider)
     .then(()=>{
+      localStorage.setItem('isSignedIn', 'true');
       this.router.navigate(['/flightdetails'])
-
     }, err => {
       // show error through toast message
       //this._logger.log(`error ${err} occured during google login`)
