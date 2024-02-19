@@ -36,6 +36,7 @@
       <mat-label>No of Guests</mat-label>
       <input matInput type="number" formControlName="numOfGuests">
       <mat-error *ngIf="flightForm.get('numOfGuests')?.hasError('required')">required</mat-error>
+      <mat-error *ngIf="flightForm.get('numOfGuests')?.hasError('min')">Minimum number of guests should be 1</mat-error>
     </mat-form-field>
 
     <mat-form-field>

@@ -34,7 +34,7 @@ export class FlightdetailsComponent {
       arrivalDate: ['', Validators.required],
       arrivalTime: ['', Validators.required],
       flightNumber: ['', Validators.required],
-      numOfGuests: [1, [Validators.required, Validators.min(1)]],
+      numOfGuests: [0, [Validators.required, Validators.min(1)]],
       comments: ['']
     });
     
