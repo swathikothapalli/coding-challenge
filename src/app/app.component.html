@@ -1,5 +1,6 @@
 <mat-toolbar color="primary" class="header">
     <a routerLink="login" routerLinkActive="active" ariaCurrentWhenActive="page"class="link">Home</a>
+    <span style="margin-left: 10px; margin-right: 15px;">|</span>
     <a routerLink="flightdetails" routerLinkActive="active" ariaCurrentWhenActive="page" class="link">Reservation Form</a>
     <button mat-button *ngIf="isSignedIn()" (click)="logout()" class="logout-btn">Logout</button>
 </mat-toolbar>
