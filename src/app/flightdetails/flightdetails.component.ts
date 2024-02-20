@@ -73,17 +73,17 @@ export class FlightdetailsComponent {
     this.http.post(environment.apiEndPoint, details).subscribe(
       (response: any) => {
         if (response == true) {
-          this.snackBar.open('Details submitted successfully', '', { duration: 3000,panelClass:['success'] });
+          this.snackBar.open('Details submitted successfully', '', { duration: 3000, horizontalPosition: 'center', verticalPosition:'top', panelClass:['success'] },);
           this.flightForm.reset();
           this.formDirective.resetForm();
         } else {
-          this.snackBar.open('Error submitting flight details', '', { duration: 3000, panelClass:['failed'] });
+          this.snackBar.open('Error submitting flight details', '', { duration: 3000, horizontalPosition: 'center', verticalPosition:'top', panelClass:['failed'] });
           this.flightForm.reset();
           this.formDirective.resetForm();
         }
       },
       (error: any) => {
-        this.snackBar.open('Error submitting flight details', '', { duration: 3000 });
+        this.snackBar.open('Error submitting flight details', '', { duration: 3000,horizontalPosition: 'center', verticalPosition:'top' });
         this.flightForm.reset();
         this.formDirective.resetForm();
       }
