@@ -11,9 +11,26 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 export const routes: Routes = [
     { path: '', redirectTo:'login',pathMatch: 'full'},
+
     { path: 'login', component: LoginComponent },
-    { path: 'register', component: SignupComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent},
-    { path: 'verify-email', component: VerifyEmailComponent},
-    { path: 'flightdetails', component: FlightdetailsComponent, canActivate: [AuthGuard]}
+
+    { 
+      path: 'register', 
+      loadComponent: ()=> import('../app/signup/signup.component').then(c => c.SignupComponent) 
+    },
+
+    { path: 'forgot-password',
+      loadComponent: ()=> import('../app/forgot-password/forgot-password.component').then(c => c.ForgotPasswordComponent)
+    },
+
+    { 
+      path: 'verify-email', 
+      loadComponent: ()=> import('../app/verify-email/verify-email.component').then(c => c.VerifyEmailComponent)
+    },
+
+    { 
+      path: 'flightdetails', 
+      loadComponent: ()=> import('../app/flightdetails/flightdetails.component').then(c => c.FlightdetailsComponent), 
+      canActivate: [AuthGuard]
+    }
   ];
